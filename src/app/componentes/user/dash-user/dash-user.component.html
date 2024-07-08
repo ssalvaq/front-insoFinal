@@ -1,0 +1,61 @@
+<!-- dash-user.component.html -->
+<div class="container mt-4">
+  <div class="header d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <button (click)="previousMonth()" class="btn btn-secondary me-2">&#8592; Anterior</button>
+      <button (click)="nextMonth()" class="btn btn-secondary ms-2">Siguiente &#8594;</button>
+    </div>
+    <h2>{{ monthName }} {{ currentYear }}</h2>
+    <div>
+      <button (click)="goToToday()" class="btn btn-primary ms-3">Hoy</button>
+      <button (click)="navigateToRegisterDebt()" class="btn btn-success ms-3">Registrar Deuda</button>
+    </div>
+  </div>
+
+  <div *ngIf="todayDebts.length > 0" class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Alertas de Vencimiento</h4>
+    <ul>
+      <li *ngFor="let debt of todayDebts">
+        <strong>{{ debt.numeroDocumento }}</strong> de <strong>{{ debt.empresa }}</strong> vence hoy con un monto de
+        <strong>{{ debt.monto | currency }}</strong>.
+      </li>
+    </ul>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let debt of debts" class="col">
+      <div class="card h-100 debt-card">
+        <div [ngClass]="getDebtCardClass(debt)" class="debt-status-bar"></div>
+        <div class="card-body">
+          <h5 class="card-title">{{ debt.numeroDocumento }}</h5>
+          <p class="card-text"><strong>Empresa:</strong> {{ debt.empresa }}</p>
+          <p class="card-text"><strong>Monto:</strong> {{ debt.monto | currency }}</p>
+          <p class="card-text"><strong>Fecha de Vencimiento:</strong> {{ debt.fechaVencimiento | date }}</p>
+          <p class="card-text"><strong>Estado:</strong> {{ debt.estado }}</p>
+          <p class="card-text"><strong>Tipo:</strong> {{ debt.tipo }}</p>
+          <button *ngIf="debt.estado !== 'PAGADA'" (click)="marcarComoPagada(debt.id)" class="btn btn-success">Marcar
+            como Pagada</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-5">Cronograma de Pagos</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let cron of cronograma" class="col">
+      <div class="card h-100 debt-card">
+        <div [ngClass]="getDebtCardClass(cron)" class="debt-status-bar"></div>
+        <div class="card-body">
+          <h5 class="card-title">{{ cron.numeroPago }}</h5> <!-- Actualizar a numeroPago -->
+          <p class="card-text"><strong>Empresa:</strong> {{ cron.empresa }}</p>
+          <p class="card-text"><strong>Monto:</strong> {{ cron.cuota | currency }}</p>
+          <p class="card-text"><strong>Fecha de Vencimiento:</strong> {{ cron.fechaVencimiento | date }}</p>
+          <p class="card-text"><strong>Estado:</strong> {{ cron.estado }}</p>
+          <p class="card-text"><strong>Tipo:</strong> {{ cron.tipoDeuda }}</p> <!-- Actualizar a tipoDeuda -->
+          <button *ngIf="cron.estado !== 'PAGADA'" (click)="marcarPagoCronogramaComoPagado(cron.id)"
+            class="btn btn-success">Marcar como Pagada</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+/* Estilos para la navbar */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para la campana de notificaciones */
+  .icon-bell {
+    font-size: 24px;
+    color: #6c757d;
+  }
+  
+  .icon-bell-active {
+    color: #dc3545;
+  }
+  
+  /* Estilos para las tarjetas de deuda */
+  .debt-card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .debt-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Barra de estado de la deuda */
+  .debt-status-bar {
+    height: 10px;
+  }
+  
+  /* Colores personalizados */
+  .bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+  
+  .bg-warning {
+    background-color: #ffc107 !important;
+  }
+  
+  .bg-dark {
+    background-color: #343a40 !important;
+  }
+  

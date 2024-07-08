@@ -1,0 +1,42 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+  
+  .text-danger {
+    font-size: 0.9em;
+    margin-top: 0.5em;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  .alert {
+    margin-top: 20px;
+  }
+  
+  button.btn.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  button.btn.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  

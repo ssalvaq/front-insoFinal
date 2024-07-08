@@ -1,0 +1,126 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Registrar Deuda</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button class="btn btn-outline-danger" (click)="logout()">Cerrar Sesión</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <button class="btn btn-secondary mb-3" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Volver
+  </button>
+  <h2>Registrar Deuda</h2>
+  <form [formGroup]="deudaForm" (ngSubmit)="registrarDeuda()">
+    <div class="mb-3">
+      <label for="tipoDeuda" class="form-label">Tipo de Deuda</label>
+      <select id="tipoDeuda" formControlName="tipoDeuda" class="form-select" required>
+        <option value="">Seleccione el tipo de deuda</option>
+        <option value="COMPRA">Compra</option>
+        <option value="IMPUESTO">Impuesto</option>
+        <option value="SERVICIO">Servicio</option>
+        <option value="CRONOGRAMA">Cronograma de Pagos</option>
+      </select>
+      <div *ngIf="submitted && !formControls['tipoDeuda'].valid" class="text-danger">
+        Tipo de Deuda es requerido.
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="numeroDocumento" class="form-label">Número de Documento</label>
+          <input type="text" id="numeroDocumento" formControlName="numeroDocumento" class="form-control" required>
+          <div *ngIf="submitted && !formControls['numeroDocumento'].valid" class="text-danger">
+            Número de Documento es requerido y debe ser un número de hasta 10 dígitos.
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="empresa" class="form-label">Empresa</label>
+          <input type="text" id="empresa" formControlName="empresa" class="form-control" required>
+          <div *ngIf="submitted && !formControls['empresa'].valid" class="text-danger">
+            La empresa es requerida y debe tener un máximo de 50 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="monto" class="form-label">Monto</label>
+          <input type="number" id="monto" formControlName="monto" class="form-control" required>
+          <div *ngIf="submitted && !formControls['monto'].valid" class="text-danger">
+            El monto es requerido y debe ser mayor a 0.
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
+          <input type="date" id="fechaVencimiento" formControlName="fechaVencimiento" class="form-control" required>
+          <div *ngIf="submitted && !formControls['fechaVencimiento'].valid" class="text-danger">
+            La fecha de vencimiento es requerida.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos específicos de COMPRA -->
+    <div *ngIf="deudaForm.get('tipoDeuda')?.value === 'COMPRA'">
+      <div class="mb-3">
+        <label for="metodoPago" class="form-label">Método de Pago</label>
+        <input type="text" id="metodoPago" formControlName="metodoPago" class="form-control" required>
+        <div *ngIf="submitted && !formControls['metodoPago'].valid" class="text-danger">
+          El método de pago es requerido y debe tener un máximo de 20 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos específicos de IMPUESTO -->
+    <div *ngIf="deudaForm.get('tipoDeuda')?.value === 'IMPUESTO'">
+      
+    </div>
+
+    <!-- Campos específicos de CRONOGRAMA -->
+    <div *ngIf="deudaForm.get('tipoDeuda')?.value === 'CRONOGRAMA'">
+      <div class="mb-3">
+        <label for="tasaInteres" class="form-label">Tasa de Interés</label>
+        <input type="number" id="tasaInteres" formControlName="tasaInteres" class="form-control" required>
+        <div *ngIf="submitted && !formControls['tasaInteres'].valid" class="text-danger">
+          La tasa de interés es requerida y debe ser un número positivo.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="plazoMeses" class="form-label">Plazo en Meses</label>
+        <input type="number" id="plazoMeses" formControlName="plazoMeses" class="form-control" required>
+        <div *ngIf="submitted && !formControls['plazoMeses'].valid" class="text-danger">
+          El plazo en meses es requerido y debe ser un número positivo.
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos específicos de SERVICIO -->
+    <div *ngIf="deudaForm.get('tipoDeuda')?.value === 'SERVICIO'">
+      
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar Deuda</button>
+  </form>
+
+  <!-- Contenedor del mensaje de éxito -->
+  <div *ngIf="successMessage" class="alert alert-success mt-4">
+    {{ successMessage }}
+  </div>
+</div>
