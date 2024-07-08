@@ -1,8 +1,8 @@
 // auth.service.ts
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import baserUrl from './helper';
 
@@ -17,9 +17,7 @@ export interface CronogramaPagoDTO {
   empresa: string;
   tipoDeuda: string;
   estado: string;
-  numeroDocumento: string;  // Añadir estas propiedades
-  monto: number;            // Añadir estas propiedades
-  cronogramaPagos?: CronogramaPagoDTO[];
+  numeroDocumento: string; 
 }
 
 
@@ -170,12 +168,22 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.getItem('token')}` });
     return this.http.get(`${baserUrl}/deudas/cronograma`, { headers });
   }
-  // Método para marcar un cronograma como pagado
+
   marcarCronogramaComoPagado(id: number): Observable<CronogramaPagoDTO> {
     const url = `${baserUrl}/deudas/marcar-pagada-cronograma/${id}`;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
     });
-    return this.http.post<CronogramaPagoDTO>(url, {}, { headers });
+    console.log(`Llamando al endpoint: ${url} con headers:`, headers);
+    return this.http.post<CronogramaPagoDTO>(url, {}, { headers }).pipe(
+      tap(response => console.log('Respuesta del servidor:', response)),
+      catchError(error => {
+        console.error('Error al marcar cronograma como pagado:', error);
+        return throwError(error);
+      })
+    );
   }
+
+
+
 }

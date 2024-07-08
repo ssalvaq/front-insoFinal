@@ -1,46 +1,75 @@
 /* Estilos para la navbar */
 .navbar {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilos para la campana de notificaciones */
-  .icon-bell {
-    font-size: 24px;
-    color: #6c757d;
-  }
-  
-  .icon-bell-active {
-    color: #dc3545;
-  }
-  
-  /* Estilos para las tarjetas de deuda */
-  .debt-card {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .debt-card:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Barra de estado de la deuda */
-  .debt-status-bar {
-    height: 10px;
-  }
-  
-  /* Colores personalizados */
-  .bg-success {
-    background-color: #28a745 !important;
-  }
-  
-  .bg-danger {
-    background-color: #dc3545 !important;
-  }
-  
-  .bg-warning {
-    background-color: #ffc107 !important;
-  }
-  
-  .bg-dark {
-    background-color: #343a40 !important;
-  }
-  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las tarjetas de deuda */
+.debt-card,
+.cronograma-card {
+  transition: transform 0.2s ease-in-out;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.debt-card:hover,
+.cronograma-card:hover {
+  transform: scale(1.05);
+}
+
+/* Barra de estado de la deuda */
+.debt-status-bar {
+  height: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Colores personalizados */
+.bg-success {
+  background-color: #68c08b !important; /* Verde pastel */
+  color: #000 !important; /* Texto en negro */
+}
+
+.bg-danger {
+  background-color: #fc8888 !important; /* Rojo pastel */
+  color: #000 !important; /* Texto en negro */
+}
+
+.bg-warning {
+  background-color: #e7ce8f !important; /* Amarillo pastel */
+  color: #000 !important; /* Texto en negro */
+}
+
+.bg-dark {
+  background-color: #918d8d !important; /* Gris pastel */
+  color: #000 !important; /* Texto en negro */
+}
+
+/* Leyenda de colores */
+.color-legend {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.color-legend ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.color-legend li {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.color-legend .badge {
+  font-size: 1rem;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #E0E0E0; /* Color de fondo pastel */
+  color: #000; /* Texto en negro */
+  border-radius: 5px;
+}

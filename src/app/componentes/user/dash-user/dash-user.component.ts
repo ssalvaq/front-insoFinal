@@ -82,7 +82,12 @@ export class DashUserComponent implements OnInit {
 
   loadCronograma(month: number, year: number) {
     this.authService.obtenerCronograma().subscribe((cronograma: CronogramaPagoDTO[]) => {
+      console.log('Cronograma recibido:', cronograma);
       this.cronograma = this.filterCronograma(cronograma, month, year);
+      // Verificar que cada elemento tiene un id
+      this.cronograma.forEach(cron => {
+        console.log(`Cronograma ID: ${cron.id}, Numero Pago: ${cron.numeroPago}`);
+      });
     });
   }
 
@@ -148,14 +153,18 @@ export class DashUserComponent implements OnInit {
   }
 
   marcarPagoCronogramaComoPagado(cronogramaId: number) {
-    if (cronogramaId) {
+    console.log('Intentando marcar como pagado el cronograma con ID:', cronogramaId);
+    if (cronogramaId !== undefined && cronogramaId !== null) {
       this.authService.marcarCronogramaComoPagado(cronogramaId).subscribe(response => {
+        console.log('Respuesta del servidor:', response);
         this.cronograma = this.cronograma.map(cron => {
           if (cron.id === cronogramaId) {
             return { ...cron, estado: 'PAGADA' }; // Actualiza el estado del cronograma
           }
           return cron;
         });
+      }, error => {
+        console.error('Error al marcar el cronograma como pagado:', error);
       });
     } else {
       console.error('Invalid cronogramaId:', cronogramaId);

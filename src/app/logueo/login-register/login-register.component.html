@@ -3,30 +3,27 @@
     <div class="row full-height justify-content-center">
       <div class="col-12 text-center align-self-center py-5">
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-
           <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" (change)="switchMode()" />
           <label for="reg-log"></label>
-
           <div class="card-3d-wrap mx-auto">
-            <div class="card-3d-wrapper">
-
+            <div class="card-3d-wrapper" [class.flipped]="!isLoginMode">
               <!-- Formulario de Login -->
-              <div class="card-front" *ngIf="isLoginMode">
+              <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-4 pb-3">Iniciar Sesión</h4>
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
                       <div class="form-group">
-                        <input type="email" class="form-style" placeholder="Correo" formControlName="correo" />
                         <i class="input-icon fas fa-envelope"></i>
+                        <input type="email" class="form-style" placeholder="Correo" formControlName="correo" />
                         <div *ngIf="loginControls['correo'].invalid && loginControls['correo'].touched"
                           class="text-danger">
                           Correo es requerido y debe ser válido.
                         </div>
                       </div>
                       <div class="form-group mt-2">
-                        <input type="password" class="form-style" placeholder="Contraseña" formControlName="password" />
                         <i class="input-icon fas fa-lock"></i>
+                        <input type="password" class="form-style" placeholder="Contraseña" formControlName="password" />
                         <div *ngIf="loginControls['password'].invalid && loginControls['password'].touched"
                           class="text-danger">
                           Contraseña es requerida.
@@ -37,85 +34,77 @@
                   </div>
                 </div>
               </div>
-
               <!-- Formulario de Registro -->
-              <div class="card-back" *ngIf="!isLoginMode">
+              <div class="card-back">
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h4 class="mb-3 pb-3">Crear Cuenta</h4>
                     <form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
                       <div class="form-group" style="display: flex; flex-wrap: wrap;">
                         <div class="col-6 p-0 pr-2">
-                          <input type="text" class="form-style" placeholder="Apellidos" formControlName="apellido" />
                           <i class="input-icon fas fa-user"></i>
+                          <input type="text" class="form-style" placeholder="Apellidos" formControlName="apellido" />
                           <div *ngIf="registerControls['apellido'].invalid && registerControls['apellido'].touched"
                             class="text-danger">
                             Apellido es requerido.
                           </div>
                         </div>
                         <div class="col-6 p-0 pl-2">
+                          <i class="input-icon fas fa-user"></i>
                           <input type="text" class="form-style" placeholder="Nombres" formControlName="nombre" />
-                          
                           <div *ngIf="registerControls['nombre'].invalid && registerControls['nombre'].touched"
                             class="text-danger">
                             Nombre es requerido.
-                            <i class="input-icon fas fa-user"></i>
                           </div>
                         </div>
                       </div>
-
                       <div class="form-group" style="display: flex; flex-wrap: wrap;">
                         <div class="col-6 p-0 pr-2">
-                          <input type="tel" class="form-style" placeholder="Teléfono" formControlName="telefono" />
                           <i class="input-icon fas fa-phone"></i>
+                          <input type="tel" class="form-style" placeholder="Teléfono" formControlName="telefono" />
                           <div *ngIf="registerControls['telefono'].invalid && registerControls['telefono'].touched"
                             class="text-danger">
                             Teléfono es requerido y debe tener 9 dígitos.
                           </div>
                         </div>
                         <div class="col-6 p-0 pl-2">
-                          <input type="text" class="form-style" placeholder="DNI" formControlName="dni" />
                           <i class="input-icon fas fa-id-card"></i>
+                          <input type="text" class="form-style" placeholder="DNI" formControlName="dni" />
                           <div *ngIf="registerControls['dni'].invalid && registerControls['dni'].touched"
                             class="text-danger">
                             DNI es requerido y debe tener 8 dígitos.
                           </div>
                         </div>
                       </div>
-
                       <div class="form-group mt-2">
-                        <input type="email" class="form-style" placeholder="Correo" formControlName="correo" />
                         <i class="input-icon fas fa-at"></i>
+                        <input type="email" class="form-style" placeholder="Correo" formControlName="correo" />
                         <div *ngIf="registerControls['correo'].invalid && registerControls['correo'].touched"
                           class="text-danger">
                           Correo es requerido y debe ser válido.
                         </div>
                       </div>
-
                       <div class="form-group mt-2">
-                        <input type="text" class="form-style" placeholder="Usuario" formControlName="username" />
                         <i class="input-icon fas fa-user-check"></i>
+                        <input type="text" class="form-style" placeholder="Usuario" formControlName="username" />
                         <div *ngIf="registerControls['username'].invalid && registerControls['username'].touched"
                           class="text-danger">
                           Usuario es requerido.
                         </div>
                       </div>
-
                       <div class="form-group mt-2">
-                        <input type="password" class="form-style" placeholder="Contraseña" formControlName="password" />
                         <i class="input-icon fas fa-lock"></i>
+                        <input type="password" class="form-style" placeholder="Contraseña" formControlName="password" />
                         <div *ngIf="registerControls['password'].invalid && registerControls['password'].touched"
                           class="text-danger">
                           Contraseña es requerida.
                         </div>
                       </div>
-
                       <button class="btn mt-4" type="submit">Registrarse</button>
                     </form>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

@@ -16,8 +16,18 @@
   </div>
 </nav>
 
+<!-- Leyenda de colores -->
+<div class="container mt-4 color-legend">
+  <h5>Significado de los Colores:</h5>
+  <ul class="d-flex justify-content-center">
+    <li><span class="badge bg-success">Verde</span>: Deuda Pagada</li>
+    <li><span class="badge bg-danger">Rojo</span>: Deuda Vencida</li>
+    <li><span class="badge bg-warning">Amarillo</span>: Deuda Próxima a Vencer</li>
+    <li><span class="badge bg-dark">Negro</span>: Deuda Activa</li>
+  </ul>
+</div>
 
-<!-- dash-user.component.html -->
+<!-- Contenedor Principal -->
 <div class="container mt-4">
   <div class="header d-flex justify-content-between align-items-center mb-3">
     <div>
@@ -31,6 +41,7 @@
     </div>
   </div>
 
+  <!-- Alertas de Vencimiento -->
   <div *ngIf="todayDebts.length > 0" class="alert alert-warning" role="alert">
     <h4 class="alert-heading">Alertas de Vencimiento</h4>
     <ul>
@@ -41,6 +52,8 @@
     </ul>
   </div>
 
+  <!-- Tarjetas de Deudas -->
+  <h3>Deudas</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let debt of debts" class="col">
       <div class="card h-100 debt-card">
@@ -59,18 +72,20 @@
     </div>
   </div>
 
+  <!-- Tarjetas de Cronogramas de Pagos -->
   <h3 class="mt-5">Cronograma de Pagos</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let cron of cronograma" class="col">
-      <div class="card h-100 debt-card">
+      <div class="card h-100 cronograma-card">
         <div [ngClass]="getDebtCardClass(cron)" class="debt-status-bar"></div>
         <div class="card-body">
-          <h5 class="card-title">{{ cron.numeroPago }}</h5> <!-- Actualizar a numeroPago -->
+          <h5 class="card-title">Pago No: {{ cron.numeroPago }}</h5>
+          <p class="card-text"><strong>Numero Documento:</strong> {{ cron.numeroDocumento }}</p> <!-- Mostrar el numeroDocumento -->
           <p class="card-text"><strong>Empresa:</strong> {{ cron.empresa }}</p>
           <p class="card-text"><strong>Monto:</strong> {{ cron.cuota | currency }}</p>
           <p class="card-text"><strong>Fecha de Vencimiento:</strong> {{ cron.fechaVencimiento | date }}</p>
           <p class="card-text"><strong>Estado:</strong> {{ cron.estado }}</p>
-          <p class="card-text"><strong>Tipo:</strong> {{ cron.tipoDeuda }}</p> <!-- Actualizar a tipoDeuda -->
+          <p class="card-text"><strong>Tipo:</strong> {{ cron.tipoDeuda }}</p>
           <button *ngIf="cron.estado !== 'PAGADA'" (click)="marcarPagoCronogramaComoPagado(cron.id)"
             class="btn btn-success">Marcar como Pagada</button>
         </div>

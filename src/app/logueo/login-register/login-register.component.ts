@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-register',
@@ -45,6 +46,12 @@ export class LoginRegisterComponent {
         },
         error => {
           console.error('Login failed', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Credenciales inválidas. Inténtalo de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
       );
     }
@@ -55,10 +62,22 @@ export class LoginRegisterComponent {
       const registerData = this.registerForm.value;
       this.authService.register(registerData).subscribe(
         response => {
-         
+          Swal.fire({
+            title: 'Registro Exitoso',
+            text: 'Tu cuenta ha sido creada con éxito.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          this.switchMode();
         },
         error => {
           console.error('Registration failed', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al registrar tu cuenta. Inténtalo nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
       );
     }
